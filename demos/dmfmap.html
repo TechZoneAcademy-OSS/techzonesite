@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Page Template</title>
+        <script type="text/javascript" src="./d3.js"></script>
+	<style type="text/css">
+		div.tooltip {	
+			position: absolute;			
+			text-align: center;			
+			width: 250px;					
+			height: 280px;					
+			padding: 2px;				
+			font: 12px sans-serif;		
+			background: lightsteelblue;	
+			border: 0px;		
+			border-radius: 8px;			
+			pointer-events: none;			
+		}	
+		div.legend {	
+			position: absolute;			
+			text-align: center;			
+			width: 450px;					
+			height: 100px;					
+			padding: 2px;				
+			font: 12px sans-serif;		
+			background: lightsteelblue;	
+			border: 0px;		
+			border-radius: 8px;			
+			pointer-events: none;			
+		}	
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+
+			//Width and height
+			var w = 1000;
+			var h = 1000;
+
+			//Define default path generator
+			//var path = d3.geo.path();
+   
+			var projection = d3.geo.mercator()
+				.scale(8700)
+				.translate([-1550,980])
+				.precision(.1);
+
+			var path = d3.geo.path()
+				.projection(projection);
+			
+			var div2=d3.select("body").append("div")
+						.attr("class","legend")
+						.style("opacity",1)
+						.style("left", "420px")
+						.style("top","60px")
+						.html('<br><em><strong>How to read this map:</strong></em><br><ul><li>States highlighted in purple are those for which DMF data exists</li><li>Hovering over the state will open a popup with the DMF data</li><li>Clicking the state will open the state DMF page</li></ul>')
+			
+			var div=d3.select("body").append("div")
+						.attr("class","tooltip")
+						.style("opacity",0)
+						//Create SVG element
+			var svg = d3.select("body")
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h);
+						
+			var format = d3.time.format("%Y/%m/%d")
+			var fmt2= d3.time.format("%d-%b-%Y")
+			//Load in GeoJSON data
+			d3.json("./dmftest-simple.geojson", function(json) {
+				
+				//Bind data and create one path per GeoJSON feature
+				svg.selectAll("path")
+				   .data(json.features)
+				   .enter()
+				   .append("a")
+					.attr("xlink:href", function(d){return d.properties.LNK})
+					 .attr("target","_blank")
+				   
+				   .append("path")
+				   .attr("d", path)
+				   .style("stroke","black")
+				   	.attr("fill", function(d)
+					{ 
+					   if (d.properties['DT_DMF_RUL']==null && d.properties['DT_DMF_NOT']==null ){
+						   return "#666666"
+						}
+						else{
+							return "#8E5CB4"
+						}
+					})
+				   
+				   .on("mouseover", function(d) 
+				   {
+					if (d.properties['DT_DMF_RUL']!==null || d.properties['DT_DMF_NOT']!==null) {
+						
+						var dmfnotdate="NA"
+						var dmfruledate="NA"
+						if (d.properties['DT_DMF_NOT']!=null){
+							dmfnotdate=fmt2(format.parse(d.properties['DT_DMF_NOT']))
+						}
+						if (d.properties['DT_DMF_RUL']!=null){
+						
+							dmfruledate=fmt2(format.parse(d.properties['DT_DMF_RUL']))               
+						}
+						d3.select(this).attr("fill","#1E732D")
+						//Get this bar's x/y values, then augment for the tooltip
+						var xPosition =  d3.mouse(this)[0];
+						var yPosition =  d3.mouse(this)[1];
+						var xDiv=xPosition +50
+						var yDiv=yPosition+50
+						
+						//Create the tooltip label
+						div.transition()		
+							.duration(200)		
+							.style("opacity", .9);		
+						div.html("<center><h1>"+d.properties['ST_NM'] +"</h1></center><left>"
+					
+									+"<br/><i>Date of DMF Notification: </i>"+dmfnotdate
+									+"<br/><i>Date of DMF Rules: </i>"+ dmfruledate
+									
+									+"<br/><i>Total Districts: </i>"+d.properties['TOT_DISTS']
+									+"<br/><i>DMF Districts: </i>"+d.properties['NUM_DISTS']
+									+"<br/><i>Expected Royalty from Coal (INR) : </i>"+d.properties['RYLT_C']+" Cr"
+									+"<br/><i>Expected Royalty from Other Minerals (INR): </i>"+d.properties['RYLT_NC']+" Cr"
+									+"<br/><i>Actual Collection by DMF (INR): </i>"+d.properties['COLL_DMF']  +" Cr")
+							.style("left",  + xDiv+ "px")	
+							.style("top", yDiv +"px");	
+					
+						svg.append("line")
+							.attr("id","pointer")
+							.attr("x1", xDiv)
+							.attr("y1", yDiv)
+							.attr("x2", xPosition)
+							.attr("y2", yPosition)
+							.style("stroke", "black")
+						
+
+						}
+					})
+					.on("mouseout", function() {
+			   
+						d3.select(this).attr("fill", function(d)
+						{ 
+							if (d.properties.DT_DMF_RUL===null && d.properties['DT_DMF_NOT']==null){
+								return "#666666"
+							}
+							else{
+								return "#8E5CB4"
+							}
+						})
+						//Remove the tooltip
+						
+						d3.select("#tooltip").remove();
+						d3.select("#pointer").remove();
+						div.transition()		
+							.duration(1500)		
+							.style("opacity", 0);
+						
+					});
+		
+			});
+			
+		</script>
+	</body>
+</html>
