@@ -50,10 +50,16 @@
 				border-radius: 8px;			
 				pointer-events: none;
 				color: white			
-			}	
+			}
+		#mapid 
+		{ 
+			height: 400px; 
+			width:  800px;
+		}
 		</style>
 		<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" crossorigin=""></script>
+			<script src="https://d3js.org/d3.v4.min.js"></script>
 		<script src="js/displaycourses.js"></script>
 	
 	</head>
@@ -75,7 +81,12 @@
 		<!-- Banner -->
 			<section id="banner">
 				<h2><img src="images/logo.png" height="150px" width="150px" ><br><font style="color: red">Tech</font><font style="color: green">Zone</font> <font style="color: blue">Academy</font></h2>
-				<p><b><font style="color: orange">Technical Skills, Services and Careers in Remote and Rural Regions</font></b></p>
+				<p>
+					<b><font style="color: orange">Technical Skills, Services and Careers in Remote and Rural Regions</font></b>
+					<br>
+					<b><font style="color: red">An ISO 9001:2015 Certified Organization</font></b>
+				
+				</p>
 				<ul class="actions">
 					<li>
 						<a href="#sec-courses" class="button big" style="background-color: blue">Courses</a>
@@ -93,7 +104,7 @@
 			</section>
 
 		<!-- Courses -->
-			<section id="sec-courses" class="wrapper style1 special">
+			<section id="sec-courses" class="wrapper style2 special">
 				<div class="container">
 					<header class="major">
 						<h2>Courses</h2>
@@ -101,20 +112,26 @@
 						<br>Courses are either <b><font style="color: green">basic</font></b>, <b><font style="color: blue">intermediate</font></b>, <b><font style="color: orange">advanced</font></b> or <b><font style="color: red">discretionary</font></b>
 						</p>
 					</header>
-					<div class="row 100%">
-						<div id="courses" class="12u 12u$(medium)"></div>
-					<script>
-	
+					<div class="row">
+						<div  class="12u 12u$(small)">
+							<div id="courses" class="container"></div>
+						</div>
+						<div  class="12u 12u$(small)">
+							<div id="coursetable" class="table-wrapper"></div>
+						</div>
+						<script>
 							// load device list in GeoJSON from a Google spreadsheet
 							var url="https://spreadsheets.google.com/feeds/list/1y9ur6DDQlDNHeQsha714_ZI_5oAiAJ0VRyTQh6wBkdg/od6/public/basic?alt=json"
 							$.getJSON(url, function(data) {
 								var entry = data.feed.entry;
 								courses=getCourseList(entry)
+								
+								displayTable(courses)
 								displayCourses(courses)
 								
 							});
-							
 						</script>
+						
 					</div>
 				</div>
 			</section>
@@ -165,22 +182,22 @@
 							<section class="3u 6u(medium) 12u$(xsmall) profile">
 								<img src="images/profile_placeholder.gif" alt="" />
 								<h4>Web Developer</h4>
-								<p>Lorem ipsum dolor</p>
+								<p>TechZone Academy, Almora</p>
 							</section>
 							<section class="3u 6u$(medium) 12u$(xsmall) profile">
 								<img src="images/profile_placeholder.gif" alt="" />
 								<h4>Blockchain Analyst</h4>
-								<p>Ullam nihil repudi</p>
+								<p>TechZone Academy, Almora</p>
 							</section>
 							<section class="3u 6u(medium) 12u$(xsmall) profile">
 								<img src="images/profile_placeholder.gif" alt="" />
 								<h4>Technology Trainer</h4>
-								<p>Harum corrupti quia</p>
+								<p>TechZone Academy, Almora</p>
 							</section>
 							<section class="3u$ 6u$(medium) 12u$(xsmall) profile">
 								<img src="images/profile_placeholder.gif" alt="" />
 								<h4>Business Developer</h4>
-								<p>Et natus sapiente</p>
+								<p>TechZone Academy, Almora</p>
 							</section>
 						</div>
 					</section>
@@ -234,8 +251,9 @@
 							</section>
 					
 						</div>
-						<div class="12u$">
-						<p><h3>Locations	</h3></p>
+						<div id="locations" class="12u$">
+							<div class="12u$" ><p><h3>Locations</h3></p></div>
+							<iframe src="locations.html" height=400 width=90%></iframe></div>
 						</div>
 						<div id="story" class="12u$">
 						<p><h3>Story</h3></p>
@@ -263,7 +281,7 @@
 					<div class="row">
 						<div class="8u 12u$(medium)">
 							<ul class="copyright">
-								<li>&copy; Untitled. All rights reserved.</li>
+								<li>&copy; TechZone Academy. All rights reserved.</li>
 								<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
 								<li>Images: <a href="http://unsplash.com">Unsplash</a></li>
 							</ul>
@@ -271,7 +289,7 @@
 						<div class="4u$ 12u$(medium)">
 							<ul class="icons">
 								<li>
-									<a class="icon rounded fa-facebook"><span class="label">Facebook</span></a>
+									<a class="icon rounded fa-facebook" href=""><span class="label">Facebook</span></a>
 								</li>
 								<li>
 									<a class="icon rounded fa-twitter"><span class="label">Twitter</span></a>

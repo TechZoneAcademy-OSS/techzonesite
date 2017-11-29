@@ -1,0 +1,166 @@
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"  crossorigin=""/>
+	<!-- Make sure you put this AFTER Leaflet's CSS -->
+	<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" crossorigin=""></script>
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<style>
+		#mapid 
+		{ 
+			height: 100%; 
+			width: 100%;
+		}
+	</style>
+	
+	<style>
+		.popupGraph {
+			font: 11px arial, sans-serif;
+			
+		}	
+		table, th, td {
+				border: 0px solid black;
+				font: 11px arial, sans-serif;
+				text-align: right;
+		}
+		
+
+		.axis path,
+		.axis line {
+			fill: none;
+			stroke: grey;
+			stroke-width: 1;
+			shape-rendering: crispEdges;
+		}
+		.bar { fill: steelblue; }
+		.icon-div{
+			text-align: center;
+			font: 15px arial, sand-serif
+		}
+		
+		</style>
+	<title>Airbender - Air Quality Monitoring Sensor Data</title>
+</head>
+<body>
+	<center>
+		<div id="mapid"></div>
+	</center>
+	<script>
+		var maplayer="osm" //can be "osm" or "mapbox"
+		var mymap = L.map('mapid').setView([29.62,79.65 ], 12);
+		var popup = L.popup();
+		function onMapClick(e) {
+			popup
+				.setLatLng(e.latlng)
+				.setContent("You clicked the map at " + e.latlng.toString())
+				.openOn(mymap);
+		}
+		mymap.on('click', onMapClick);
+		
+		//Functions to get tile laters
+		function getosmmap(){ //add a tile layer to add to our map, in this case it's the 'standard' OpenStreetMap.org tile server
+			osmmap=L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+            maxZoom: 18
+			})
+			return osmmap
+		
+		}
+		
+		function getmapboxmap(){ //add a tile layer to add to our map, in this case it's the MapBox tile server
+			mapboxmap=L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+			maxZoom: 18,
+			id: 'mapbox.streets',
+			accessToken: 'pk.eyJ1IjoiYXJqdW52ZW4iLCJhIjoiY2phN3ptODN4MDEzMTMybG8xM2t1bzltZCJ9.1HxRGkovlxUEqMNHlMmDmw'
+				})
+			return mapboxmap
+		}
+		
+		//Selecting tile layer
+		if (maplayer=="osm"){
+			tilelayer=getosmmap()
+		}
+		else if (maplayer=="mapbox"){
+			tilelayer=getmapboxmap()
+		}
+		
+		//Adding the selected tile layer
+		//tilelayer.addTo(mymap);
+		mymap.addLayer(tilelayer);
+		
+		
+		// convert channel json into list of data point objects
+		
+		function getIcon(){
+			//console.log("AQI reported for icon selection="+aqi)
+			chosen_icon="images/tzcenter.png"
+			devicon=L.divIcon({
+				className : "icon-div",
+				html: '<img src="'+chosen_icon+'" style="height: 35;width: 35;"/>'
+			})
+			//console.log(devicon.options.iconUrl)
+			return devicon		
+		}	
+	
+		
+	
+		// load device list in GeoJSON from a Google spreadsheet
+		
+		function getCenterList(entry){
+			centers=[]
+			$(entry).each(function(){
+				template={
+					"geometry" : {
+						"type":"Point","coordinates":[]
+						},
+					"type" : "Feature",
+					"properties" : {}
+				}
+				template['properties']['centername']=this.title.$t
+				valuepairs=this.content.$t.split(",")
+				$(valuepairs).each(function(){
+					key=$.trim(this.split(": ")[0]);
+					value=$.trim(this.split(": ")[1]);
+					template['properties'][key]=value;
+				});
+				template['geometry']['coordinates']=[template['properties']['longitude'],template['properties']['latitude']]
+				centers.push(template)		
+			});
+			return centers
+		}
+		
+		
+		var url="https://spreadsheets.google.com/feeds/list/1RNMlIgglZl-AHsW2SNzHwqKC2PTZypuqsZ-wgM4yhAc/od6/public/basic?alt=json"
+		$.getJSON(url, function(data) {
+			var entry = data.feed.entry;
+			centers=getCenterList(entry)
+			console.log(centers)
+			markerlayer=L.geoJson(centers, {
+				onEachFeature : function(center,layer){
+					icon=getIcon()
+					layer.setIcon(icon)
+					layer.bindPopup("Loading...",{maxWidth: 800})
+					
+					layer.on('click', function(e){
+						var popup = e.target.getPopup();
+						var div = $('<div id="popup" class="popupGraph" style="width: 150px; height:150px;">\
+										</div>')[0];
+						
+						
+						popup.setContent(div);
+						popup.update();
+						//displayGraph(div,channeldata);
+						popup.setContent(div);
+						popup.update();
+					});
+					
+				}
+			}).addTo(mymap);
+		 });
+		
+	</script>
+
+</body>
+</html>

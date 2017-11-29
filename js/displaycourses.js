@@ -1,4 +1,5 @@
 
+
 function getCourseList(entry){
 			courses=[]
 			$(entry).each(function(){
@@ -62,7 +63,7 @@ function getCourseLink(course){
 }
 
 
-function getCourseGraph(rootradius,data){
+function getCourseGraph(data){
 	var graph={
 		links:[
 			
@@ -95,7 +96,53 @@ function removeToolTip(){
 }
 
 
-function displayCourses(data=null){
+function tabulate(data, columns) {
+		var table = d3.select('#coursetable').append('table')
+		var thead = table.append('thead')
+		var	tbody = table.append('tbody');
+
+		// append the header row
+		thead.append('tr')
+		  .selectAll('th')
+		  .data(columns).enter()
+		  .append('th')
+		    .text(function (column) { return column; });
+
+		// create a row for each object in the data
+		var rows = tbody.selectAll('tr')
+		  .data(data)
+		  .enter()
+		  .append('tr');
+
+		// create a cell in each row for each column
+		var cells = rows.selectAll('td')
+		  .data(function (row) {
+		    return columns.map(function (column) {
+		      return {column: column, value: row[column]};
+		    });
+		  })
+		  .enter()
+		  .append('td')
+		    .text(function (d) { return d.value; });
+
+	  return table;
+	}
+
+
+
+
+
+function displayTable(courses=null){
+	
+	if (courses!=null){
+		colnames=d3.keys(courses[0]);
+		tabulate(courses,colnames);
+	}
+	
+}
+
+
+function displayCourses(courses=null){
 	var width = $("#courses").width();
 	var height = Math.max(400,40000/width);
 	
@@ -104,11 +151,11 @@ function displayCourses(data=null){
 		
 	var simulation = d3.forceSimulation()
 	.force("link", d3.forceLink().id(function(d) { return d.id; }))
-	.force("charge", d3.forceManyBody().strength(-280))
+	.force("charge", d3.forceManyBody().strength(-230))
 	.force("center", d3.forceCenter(width / 2, height / 2-20));
 
-	if (data!=null){
-		graph=getCourseGraph(Math.max(height,width),data)
+	if (courses!=null){
+		graph=getCourseGraph(courses)
 		var node = svg.append("g")
 			.attr("class", "nodes")
 			.selectAll("circle")
@@ -138,11 +185,11 @@ function displayCourses(data=null){
 						.style('position', 'relative')
 						.attr("class","tooltip")
 						.style("opacity",0)
+						.style("top",-height)
 		
 		svg.selectAll("circle").on("click", function(d){
 			dY=d3.mouse(this)[1]
 			dX=d3.mouse(this)[0]
-			console.log(d)
 			if (d.id!="root"){	
 				d3.select(".tooltip")
 						.html("<h1><font style='color: white'>"+d.details.coursename+"</font></h1>\
