@@ -146,11 +146,13 @@
 					layer.on('click', function(e){
 						var popup = e.target.getPopup();
 						var div = $('<div id="popup" class="popupGraph" style="width: 150px; height:150px;">\
+										<h2>'+center.properties.centername+'</h2>\
+										'+center.properties.address+'\
 										</div>')[0];
 						
 						
-						popup.setContent(div);
-						popup.update();
+						//popup.setContent(div);
+						//popup.update();
 						//displayGraph(div,channeldata);
 						popup.setContent(div);
 						popup.update();

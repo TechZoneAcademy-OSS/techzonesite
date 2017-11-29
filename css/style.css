@@ -1035,7 +1035,7 @@
 		background-position: center center;
 		background-size: cover;
 		color: #ffffff;
-		padding: 14em 0em 14em;
+		padding: 10em 0em 10em;
 		text-align: center;
 	}
 
@@ -1053,7 +1053,7 @@
 
 		#banner p {
 			font-size: 1.5em;
-			margin-bottom: 1.75em;
+			margin-bottom: 1em;
 		}
 
 /* Wrapper */
@@ -1083,7 +1083,7 @@
 		.wrapper.style2 .profiles {
 			border-bottom: 1px solid rgba(144, 144, 144, 0.25);
 			border-top: 1px solid rgba(144, 144, 144, 0.25);
-			margin-bottom: 4em;
+			margin-bottom: 2em;
 			padding-top: 4em;
 		}
 

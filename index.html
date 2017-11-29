@@ -61,6 +61,8 @@
 		<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" crossorigin=""></script>
 			<script src="https://d3js.org/d3.v4.min.js"></script>
 		<script src="js/displaycourses.js"></script>
+		<script src="js/vis.js"></script>
+		<link href="css/vis.css" rel="stylesheet" type="text/css" />
 	
 	</head>
 	<body class="landing">
@@ -114,7 +116,7 @@
 					</header>
 					<div class="row">
 						<div  class="12u 12u$(small)">
-							<div id="courses" class="container"></div>
+							<div id="courses" style="height: 450px; margin-bottom: 0px"></div>
 						</div>
 						<div  class="12u 12u$(small)">
 							<div id="coursetable" class="table-wrapper"></div>
@@ -256,7 +258,47 @@
 							<iframe src="locations.html" height=400 width=90%></iframe></div>
 						</div>
 						<div id="story" class="12u$">
-						<p><h3>Story</h3></p>
+							<p><h3>Story</h3></p>
+							<center><div id="visualization"></div>
+							</center>
+							<script>
+					
+								// load device list in GeoJSON from a Google spreadsheet
+								
+								function getEventList(entry){
+									events=[]
+									i=1
+									$(entry).each(function(){
+										template={}
+										template['content']=this.title.$t
+										template.id=i
+										valuepairs=this.content.$t.split(",")
+										$(valuepairs).each(function(){
+											key=$.trim(this.split(": ")[0]);
+											value=$.trim(this.split(": ")[1]);
+											template[key]=value;
+										});
+										events.push(template)
+										i=i+1;		
+									});
+									return events
+								}
+								
+								
+								var url="https://spreadsheets.google.com/feeds/list/1GOSic4ZJVXgy2gZrSQZ6rrzphv8I70oGwMbKATlfZSs/od6/public/basic?alt=json"
+								$.getJSON(url, function(data) {
+									var entry = data.feed.entry;
+									events=getEventList(entry)
+									console.log(events)
+									var container = document.getElementById('visualization');
+									var options = {};
+									var timeline = new vis.Timeline(container, events, options);
+
+
+								});
+							</script>	
+							
+						
 						</div>
 						
 					
