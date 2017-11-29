@@ -41,7 +41,7 @@ function getCourseNode(course){
 		node.radius=20
 		node.color="red"
 	}
-	
+	node.details=course
 	return node
 }
 
@@ -71,7 +71,7 @@ function getCourseGraph(rootradius,data){
 			{
 				"group": 1, 
 				"id": "root",
-				"radius":rootradius,
+				"radius":2,
 				"label": "",
 				"color": "#F5F5F5"
 			}, 
@@ -90,58 +90,25 @@ function getCourseGraph(rootradius,data){
 }
 
 
+function removeToolTip(){
+	d3.selectAll(".tooltip").style("opacity",0)
+}
+
 
 function displayCourses(data=null){
 	var width = $("#courses").width();
-	var height = 540000/width;
-
+	var height = Math.max(400,40000/width);
+	
 	var svg = d3.select("#courses").append("svg").attr("width",width).attr("height",height);
 	var color = d3.scaleOrdinal(d3.schemeCategory20);
-	//var div2=d3.select("body").append("div")
-	var div2=d3.select("#courses").append("div")
-					.attr("class","legend")
-					.style("opacity",1)
-					.style("left", "620px")
-					.style("top","60px")
-					.html('<svg/>')
-	
-	div2.select("svg")
-		.append("circle")
-			.attr("r",10)
-			.attr("cx",10)
-			.attr("cy",10)
-			.attr("fill","green")
-	
-	div2.select("svg")
-		.append("circle")
-			.attr("r",10)
-			.attr("cx",60)
-			.attr("cy",10)
-			.attr("fill","blue")
-	
-	div2.select("svg")
-		.append("circle")
-			.attr("r",10)
-			.attr("cx",110)
-			.attr("cy",10)
-			.attr("fill","orange")
-	
-	div2.select("svg")
-		.append("circle")
-			.attr("r",10)
-			.attr("cx",160)
-			.attr("cy",10)
-			.attr("fill","red")
-	
 		
 	var simulation = d3.forceSimulation()
 	.force("link", d3.forceLink().id(function(d) { return d.id; }))
-	.force("charge", d3.forceManyBody().strength(-650))
-	.force("center", d3.forceCenter(width / 2, height / 2));
+	.force("charge", d3.forceManyBody().strength(-280))
+	.force("center", d3.forceCenter(width / 2, height / 2-20));
 
 	if (data!=null){
 		graph=getCourseGraph(Math.max(height,width),data)
-		//console.log(graph)
 		var node = svg.append("g")
 			.attr("class", "nodes")
 			.selectAll("circle")
@@ -155,35 +122,46 @@ function displayCourses(data=null){
 					.on("end", dragended));
 				
 		svg.selectAll("circle").on("mouseover", function(d){
-			//console.log(d)
-			//console.log(this)
 			if (d.id!="root"){
 				d3.select(this).attr("fill","violet")
 			}	
 		});
 		svg.selectAll("circle").on("mouseout", function(d){
-			//console.log(d)
-			//console.log(this)
 			if (d.id!="root"){
 				d3.select(this).attr("fill",function(d) {return d.color;  })
+				d3.select(".tooltip").transition(1000).style("opacity",0)
+								
 			}		
 			
 		});
-		svg.selectAll("circle").on("click", function(d){
-			d3.selectAll(".tooltip").remove();
-			dY=this.cy.animVal.valueAsString
-			dX=this.cx.animVal.valueAsString
-			console.log(dX)
-			if (d.id!="root"){
-				//var tooltip=d3.select("body").append("div")
-				var tooltip=d3.select("#courses").append("div")
+		var tooltip=d3.select("#courses").append("div")
+						.style('position', 'relative')
 						.attr("class","tooltip")
-						.style("opacity",0.95)
-						.style("left",  dX+ "px")	
-						.style("top", dY +"px")
+						.style("opacity",0)
+		
+		svg.selectAll("circle").on("click", function(d){
+			dY=d3.mouse(this)[1]
+			dX=d3.mouse(this)[0]
+			console.log(d)
+			if (d.id!="root"){	
+				d3.select(".tooltip")
+						.html("<h1><font style='color: white'>"+d.details.coursename+"</font></h1>\
+								Duration<h1><font style='color: white'>"+d.details.duration+"</font></h1>\
+								Registration Fee<h1><font style='color: white'>"+d.details.registrationfee+"</font></h1>\
+								Monthly Fee<h1><font style='color: white'>"+d.details.monthlyfee+"</h1>\
+								Certification Fee<h1><font style='color: white'>"+d.details.certificationfee+"</font></h1>")
+						.transition(200)
+						.style("background",d.color)
+						.style("opacity",0.9)
+						.style("left", dX+ "px")	
+						.style("top", -height+dY-100 +"px")
+						
+										
 						
 			}
 		});
+		
+		
 		 
 		var link = svg.append("g")
 			.attr("class", "links")
