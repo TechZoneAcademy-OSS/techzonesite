@@ -1,0 +1,18 @@
+{
+	"name": "flare",
+	"children": [
+		{
+			"name": "arjun",
+			"size": 2000
+		},
+		{
+			"name": "deepta",
+			"size": 2000
+		},
+		{
+			"name": "vinay",
+			"size": 2000
+		}
+	],
+	"size" : 2000
+}

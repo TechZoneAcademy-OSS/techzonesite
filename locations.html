@@ -48,7 +48,7 @@
 	</center>
 	<script>
 		var maplayer="osm" //can be "osm" or "mapbox"
-		var mymap = L.map('mapid').setView([29.62,79.65 ], 12);
+		var mymap = L.map('mapid').setView([29.61018, 79.64161 ], 13);
 		var popup = L.popup();
 		function onMapClick(e) {
 			popup
@@ -136,7 +136,7 @@
 		$.getJSON(url, function(data) {
 			var entry = data.feed.entry;
 			centers=getCenterList(entry)
-			console.log(centers)
+			//console.log(centers)
 			markerlayer=L.geoJson(centers, {
 				onEachFeature : function(center,layer){
 					icon=getIcon()

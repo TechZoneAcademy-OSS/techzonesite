@@ -51,6 +51,22 @@
 				pointer-events: none;
 				color: white			
 			}
+			.node circle {
+			  fill: #fff;
+			  stroke: steelblue;
+			  stroke-width: 3px;
+			}
+
+			.node text {
+			  font: 12px sans-serif;
+			}
+
+			.link {
+			  fill: none;
+			  stroke: #ccc;
+			  stroke-width: 2px;
+			}
+
 		#mapid 
 		{ 
 			height: 400px; 
@@ -62,6 +78,7 @@
 			<script src="https://d3js.org/d3.v4.min.js"></script>
 		<script src="js/displaycourses.js"></script>
 		<script src="js/vis.js"></script>
+		<script src="js/displayteam.js"></script>
 		<link href="css/vis.css" rel="stylesheet" type="text/css" />
 	
 	</head>
@@ -146,28 +163,42 @@
 						<h2>Services</h2>
 						<p>TechZone Academy offers a wide range of services</p>
 					</header>
-					<div class="row 150%">
-						<div class="4u 12u$(medium)">
-							<section class="box">
-								<i class="icon big rounded color1 fa-cloud"></i>
-								<h3>Local Services</h3>
-								<p>Services we provide from and around our centers</p>
-							</section>
+					<div class="row 100%">
+
+						
+						
+						
+							<div class="4u 12u$(medium)">
+								<section class="box">
+									<i class="icon big rounded color1 fa fa-superpowers"></i>
+									<h3>Local Services</h3>
+									<p>Services we provide from and around our centers</p>
+								</section>
+							</div>
+							<div class="4u 12u$(medium)">
+								<section class="box">
+									<i class="icon big rounded color9 fa-desktop"></i>
+									<h3>Custom Software Development</h3>
+									<p>Website Design, Data Visualization, Mapping, Networking, Data Analysis, Web Automation</p>
+								</section>
+							</div>
+							<div class="4u$ 12u$(medium)">
+								<section class="box">
+									<i class="icon big rounded color6 fa-rocket"></i>
+									<h3>Other Services</h3>
+									<p>Consulting, Hosting, Management</p>
+								</section>
+							</div>
+						
+					<!--	
+													<div  class="12u 12u$(small)">
+							<div id="servicepane" style="height: 450px; margin-bottom: 0px"></div>
 						</div>
-						<div class="4u 12u$(medium)">
-							<section class="box">
-								<i class="icon big rounded color9 fa-desktop"></i>
-								<h3>Custom Software Development</h3>
-								<p>Website Design, Data Visualization, Mapping, Networking, Data Analysis, Web Automation</p>
-							</section>
-						</div>
-						<div class="4u$ 12u$(medium)">
-							<section class="box">
-								<i class="icon big rounded color6 fa-rocket"></i>
-								<h3>Other Services</h3>
-								<p>Consulting, Hosting, Management</p>
-							</section>
-						</div>
+					
+							<script>
+								var sheetkey="1tz6v3eFreKrc3QCqUCcAlfiMTHskC_jVeTxo4a5cROA"
+								displayServices('https://spreadsheets.google.com/feeds/list/'+sheetkey+'/od6/public/basic?alt=json')
+							</script>-->
 					</div>
 				</div>
 			</section>
@@ -180,27 +211,19 @@
 						<p>We are always on the lookout for bright sparks!</p>
 					</header>
 					<section class="profiles">
-						<div class="row">
+						<div id="posrow" class="row uniform">
+							<!--
 							<section class="3u 6u(medium) 12u$(xsmall) profile">
-								<img src="images/profile_placeholder.gif" alt="" />
-								<h4>Web Developer</h4>
-								<p>TechZone Academy, Almora</p>
+								<i class="icon rounded 'color' fa 'icon' fa-2x fa-pull-left"></i>
+								<h4> 'designation'</h4>
+								<p>'hirer', 'location'</p>		
+								
 							</section>
-							<section class="3u 6u$(medium) 12u$(xsmall) profile">
-								<img src="images/profile_placeholder.gif" alt="" />
-								<h4>Blockchain Analyst</h4>
-								<p>TechZone Academy, Almora</p>
-							</section>
-							<section class="3u 6u(medium) 12u$(xsmall) profile">
-								<img src="images/profile_placeholder.gif" alt="" />
-								<h4>Technology Trainer</h4>
-								<p>TechZone Academy, Almora</p>
-							</section>
-							<section class="3u$ 6u$(medium) 12u$(xsmall) profile">
-								<img src="images/profile_placeholder.gif" alt="" />
-								<h4>Business Developer</h4>
-								<p>TechZone Academy, Almora</p>
-							</section>
+							-->
+							<script>
+								var sheetkey="1c5YF4LjLXsAlLg9AdtLAPSe1zIAcf9aIRUem1qddXGY"
+								displayPositions('https://spreadsheets.google.com/feeds/list/'+sheetkey+'/od6/public/basic?alt=json')
+							</script>
 						</div>
 					</section>
 					<footer>
@@ -210,7 +233,7 @@
 								<a href="#" class="button big">Send us your profile!</a>
 							</li>
 							<li>
-								<a href="#" class="button big">Hire from our pool of vetted proffesionals!</a>
+								<a href="#" class="button big">Hire through us!</a>
 							</li>
 						</ul>
 					</footer>
@@ -232,23 +255,19 @@
 						<div id="team" class="12u$">
 						<p><h3>Team</h3></p>
 							<section class="profiles">
-							<div class="row">
+							<div id="teamrow" class="row uniform">
+							<!--Template for team member
 								<section class="4u 6u(medium) 12u$(xsmall) profile">
-									<img src="images/profile_placeholder.gif" alt="" />
-									<h4>Vinay Taragi</h4>
-									<p>Operations, Business Development and Training</p>
+									<img src="'piclink'" style="height: 92px; width: 92px" alt="" />
+									<h4>'name'</h4>
+									<p>'designation'</p>
 								</section>
-								<section class="4u 6u$(medium) 12u$(xsmall) profile">
-									<img src="images/profile_placeholder.gif" alt="" />
-									<h4>Arjun Venkatraman</h4>
-									<p>Training, Certification and Software Development</p>
-								</section>
-								<section class="4u 6u(medium) 12u$(xsmall) profile">
-									<img src="images/profile_placeholder.gif" alt="" />
-									<h4>Deepta Naha</h4>
-									<p>Soft Skills, Language and Communication</p>
-								</section>
-								
+							-->
+							
+							<script>
+								var sheetkey="1i4Q4LxH-Ws3N_QHpKb6qAOM6ySIzJehkxEylRtnePgs"
+								displayTeam('https://spreadsheets.google.com/feeds/list/'+sheetkey+'/od6/public/basic?alt=json')
+							</script>
 							</div>
 							</section>
 					
@@ -289,7 +308,7 @@
 								$.getJSON(url, function(data) {
 									var entry = data.feed.entry;
 									events=getEventList(entry)
-									console.log(events)
+									//console.log(events)
 									var container = document.getElementById('visualization');
 									var options = {};
 									var timeline = new vis.Timeline(container, events, options);
@@ -326,6 +345,8 @@
 								<li>&copy; TechZone Academy. All rights reserved.</li>
 								<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
 								<li>Images: <a href="http://unsplash.com">Unsplash</a></li>
+								<li>Email: info@techzoneacademy.com</li>
+								<li>Mob: +91 9012022211</li>
 							</ul>
 						</div>
 						<div class="4u$ 12u$(medium)">
