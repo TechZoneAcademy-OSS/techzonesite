@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<!--
+	Transit by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>TechZone Academy - Technology Skills, Service and Careers in Rural and Remote Regions</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-xlarge.css" />
+		</noscript>
+		
+		<style>
+			.links line {
+				stroke: #999;
+				stroke-opacity: 0.6;
+			}
+			.nodes circle {
+				cursor: pointer;
+				stroke: #fff;
+				stroke-width: 2.5px;
+			  
+			}
+			.label text {
+			  pointer-events: none;
+			  font: 11px arial, sans-serif; bold;
+			  text-anchor: middle;
+			}
+			.tooltip {	
+				position: absolute;			
+				text-align: center;			
+				width: 250px;					
+				height: 200px;					
+				padding: 8px;				
+				font: 12px sans-serif;		
+				background: lightsteelblue;	
+				border: 0px;		
+				border-radius: 8px;			
+				pointer-events: none;
+				color: white			
+			}
+			.node circle {
+			  fill: #fff;
+			  stroke: steelblue;
+			  stroke-width: 3px;
+			}
+
+			.node text {
+			  font: 12px sans-serif;
+			}
+
+			.link {
+			  fill: none;
+			  stroke: #ccc;
+			  stroke-width: 2px;
+			}
+
+		#mapid 
+		{ 
+			height: 400px; 
+			width:  800px;
+		}
+		
+		
+		
+		.wrap { width: 320px; height: 196px; padding: 0; overflow: hidden; float: left;}
+		.frame { width: 1396px; height: 786px; border: 1px solid black}
+
+		.frame {
+				// zoom: 0.25;
+				-moz-transform: scale(0.25);
+				-moz-transform-origin: 0 0;
+				-o-transform: scale(0.25);
+				-o-transform-origin: 0 0;
+				-webkit-transform: scale(0.25);
+				-webkit-transform-origin: 0 0;
+		}
+		</style>
+		<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" crossorigin=""></script>
+			<script src="https://d3js.org/d3.v4.min.js"></script>
+		<script src="js/displaycourses.js"></script>
+		<script src="js/vis.js"></script>
+		<script src="js/displayfromgdocs.js"></script>
+		<link href="css/vis.css" rel="stylesheet" type="text/css" />
+	
+	</head>
+	<body>
+
+		<!-- Header -->
+			<header id="header">
+				<nav id="nav">
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="index.html#sec-courses">Courses</a></li>
+						<li><a href="index.html#sec-services">Services</a></li>
+						<li><a href="index.html#sec-careers">Careers</a></li>
+					</ul>
+				</nav>
+			</header>
+
+		<!-- Banner -->
+			<section id="banner" class="wrapper">
+				<div class="container">
+
+					<header class="major">
+						<h2>Portfolio</h2>
+						<p>The following are examples of some of the work we have been doing for clients</p>
+					</header>
+
+				
+				</div>
+			</section>
+
+		<!-- Websites -->
+			<section id="websites" class="wrapper">
+				<div class="container">
+
+					<header class="major">
+						<h2>Websites</h2>
+						<p>A presence on the web is increasingly important for individuals, businesses as well as communities. Some of the websites we maintain</p>
+					
+					</header>
+					<div id="websiterow" class="row uniform">
+							<!--
+							<section class="3u 6u(medium) 12u$(xsmall) profile">
+								<h1>The Mojolab Foundation</h1>
+								<p>A simple organizational one page site</p>
+								<div class="wrap">
+								<iframe class="frame" src="http://mojolab.org"/>
+								</div>
+							</section>
+								
+							-->	
+								
+							<script>
+								var sheetkey="1xQU0FggBMwGQUFlOh1yMEylBdQW_gIkVNejnywpIYCQ"
+								displaySites('https://spreadsheets.google.com/feeds/list/'+sheetkey+'/od6/public/basic?alt=json')
+							</script></section>
+							
+					</div>
+				
+				</div>
+			</section>
+
+
+		<!-- Data Visualizations -->
+			<section id="dataviz" class="wrapper">
+				<div class="container">
+
+					<header class="major">
+						<h2>Data Visualization</h2>
+						<p>Statistics are best presented in a visual format. These are some of the examples of our work in the area of data visualization</p>
+					</header>
+
+				
+				</div>
+			</section>
+
+		<!-- COWMesh WiFi -->
+			<section id="cowmesh" class="wrapper">
+				<div class="container">
+
+					<header class="major">
+						<h2>COWMesh WiFi</h2>
+						<p>COWMesh stands for Community Owned Wireless Mesh, a paradigm that enables communities to own and operate their own communications networks. COWMesh is currently being used for TRAI's open WiFi pilot (WANI)</p>
+						<p>The following are some of the networks that we have set up under this program. </p>
+					</header>
+
+				
+				</div>
+			</section>
+
+		<!-- Open Source Software -->
+			<section id="oss" class="wrapper">
+				<div class="container">
+
+					<header class="major">
+						<h2>Open Source Software</h2>
+						<p>These are some of the open source software projects we work on</p>
+					</header>
+
+				
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="container">
+					
+					<!--
+					<section class="links">
+						<div class="row uniform">
+							<section class="12u 12u(medium) 12u$(small)">
+								<h3>Contact Us</h3>
+								
+							
+						</div>
+					</section>
+					-->
+					<div class="row">
+						<div class="8u 12u$(medium)">
+							<ul class="copyright">
+								<li>&copy; TechZone Academy. All rights reserved.</li>
+								<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
+								<li>Images: <a href="http://unsplash.com">Unsplash</a></li>
+								<li>Email: info@techzoneacademy.com</li>
+								<li>Mob: +91 9012022211</li>
+							</ul>
+						</div>
+						<div class="4u$ 12u$(medium)">
+							<ul class="icons">
+								<li>
+									<a class="icon rounded fa-facebook" href=""><span class="label">Facebook</span></a>
+								</li>
+								<li>
+									<a class="icon rounded fa-twitter"><span class="label">Twitter</span></a>
+								</li>
+								<li>
+									<a class="icon rounded fa-google-plus"><span class="label">Google+</span></a>
+								</li>
+								<li>
+									<a class="icon rounded fa-linkedin"><span class="label">LinkedIn</span></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</footer>
+
+	</body>
+</html>

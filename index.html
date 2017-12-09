@@ -78,24 +78,24 @@
 			<script src="https://d3js.org/d3.v4.min.js"></script>
 		<script src="js/displaycourses.js"></script>
 		<script src="js/vis.js"></script>
-		<script src="js/displayteam.js"></script>
+		<script src="js/displayfromgdocs.js"></script>
 		<link href="css/vis.css" rel="stylesheet" type="text/css" />
 	
 	</head>
 	<body class="landing">
 
-		<!-- Header
+		<!-- Header	--> 
 			<header id="header">
 				<nav id="nav">
 					<ul>
 						<li><a href="index.html">Home</a></li>
-						<li><a href="generic.html">Generic</a></li>
-						<li><a href="elements.html">Elements</a></li>
-						<li><a href="#" class="button special">Sign Up</a></li>
+						<li><a href="index.html#sec-courses">Courses</a></li>
+						<li><a href="index.html#sec-services">Services</a></li>
+						<li><a href="index.html#sec-careers">Careers</a></li>
 					</ul>
 				</nav>
 			</header>
-		--> 
+	
 
 		<!-- Banner -->
 			<section id="banner">
@@ -133,11 +133,20 @@
 					</header>
 					<div class="row">
 						<div  class="12u 12u$(small)">
-							<div id="courses" style="height: 450px; margin-bottom: 0px"></div>
+							 <a href="#signup" class="button big">Sign Up!</a>
+						</div>
+						<div  class="12u 12u$(small)">
+							<div id="courses" style="height: 500px; margin-bottom: 0px"></div>
 						</div>
 						<div  class="12u 12u$(small)">
 							<div id="coursetable" class="table-wrapper"></div>
 						</div>
+						<div  class="12u 12u$(small)">
+							<div id="signup">
+								<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfM6yL389yZlCoK4WzQ4Cakz5mFFwG8cffvo-1s4XkdnEGfGg/viewform?embedded=true" width=100% height="600" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+							</div>
+						</div>
+						
 						<script>
 							// load device list in GeoJSON from a Google spreadsheet
 							var url="https://spreadsheets.google.com/feeds/list/1y9ur6DDQlDNHeQsha714_ZI_5oAiAJ0VRyTQh6wBkdg/od6/public/basic?alt=json"
