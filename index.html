@@ -3,6 +3,7 @@
 	Transit by TEMPLATED
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+	Modified for use by TechZone Academy, Uttarakhand, India
 -->
 <html lang="en">
 	<head>
@@ -67,15 +68,14 @@
 			  stroke-width: 2px;
 			}
 
-		#mapid 
-		{ 
+		#mapid { 
 			height: 400px; 
 			width:  800px;
 		}
 		</style>
 		<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" crossorigin=""></script>
-			<script src="https://d3js.org/d3.v4.min.js"></script>
+		<script src="https://d3js.org/d3.v4.min.js"></script>
 		<script src="js/displaycourses.js"></script>
 		<script src="js/vis.js"></script>
 		<script src="js/displayfromgdocs.js"></script>
@@ -85,298 +85,299 @@
 	<body class="landing">
 
 		<!-- Header	--> 
-			<header id="header">
-				<nav id="nav">
-					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="index.html#sec-courses">Courses</a></li>
-						<li><a href="index.html#sec-services">Services</a></li>
-						<li><a href="index.html#sec-careers">Careers</a></li>
-					</ul>
-				</nav>
-			</header>
-	
+		<header id="header">
+			<nav id="nav">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="index.html#sec-courses">Courses</a></li>
+					<li><a href="index.html#sec-services">Services</a></li>
+					<li><a href="index.html#sec-careers">Careers</a></li>
+				</ul>
+			</nav>
+		</header>
+
 
 		<!-- Banner -->
-			<section id="banner">
-				<h2><img src="images/logo.png" height="150px" width="150px" ><br><font style="color: red">Tech</font><font style="color: green">Zone</font> <font style="color: blue">Academy</font></h2>
-				<p>
-					<b><font style="color: orange">Technical Skills, Services and Careers in Remote and Rural Regions</font></b>
-					<br>
-					<b><font style="color: red">An ISO 9001:2015 Certified Organization</font></b>
-				
-				</p>
-				<ul class="actions">
-					<li>
-						<a href="#sec-courses" class="button big" style="background-color: blue">Courses</a>
-					</li>
-					<li>
-						<a href="#sec-services" class="button big" style="background-color: red">Services</a>
-					</li>
-					<li>
-						<a href="#sec-careers" class="button big" style="background-color: green">Careers</a>
-					</li>
-					<li>
-						<a href="#sec-about" class="button big" style="background-color: orange">About</a>
-					</li>
-				</ul>
-			</section>
+		<section id="banner">
+			<h2><img src="images/logo.png" height="150px" width="150px" ><br><font style="color: red">Tech</font><font style="color: green">Zone</font> <font style="color: blue">Academy</font></h2>
+			<p>
+				<b><font style="color: orange">Technical Skills, Services and Careers in Remote and Rural Regions</font></b>
+				<br>
+				<b><font style="color: red">An ISO 9001:2015 Certified Organization</font></b>
+			
+			</p>
+			<ul class="actions">
+				<li>
+					<a href="#sec-courses" class="button big" style="background-color: blue">Courses</a>
+				</li>
+				<li>
+					<a href="#sec-services" class="button big" style="background-color: red">Services</a>
+				</li>
+				<li>
+					<a href="#sec-careers" class="button big" style="background-color: green">Careers</a>
+				</li>
+				<li>
+					<a href="#sec-about" class="button big" style="background-color: orange">About</a>
+				</li>
+			</ul>
+		</section>
 
 		<!-- Courses -->
-			<section id="sec-courses" class="wrapper style2 special">
-				<div class="container">
-					<header class="major">
-						<h2>Courses</h2>
-						<p>Explore our range of courses below
-						<br>Courses are either <b><font style="color: green">basic</font></b>, <b><font style="color: blue">intermediate</font></b>, <b><font style="color: orange">advanced</font></b> or <b><font style="color: red">discretionary</font></b>
-						</p>
-					</header>
-					<div class="row">
-						<div  class="12u 12u$(small)">
-							 <a href="#signup" class="button big">Sign Up!</a>
-						</div>
-						<div  class="12u 12u$(small)">
-							<div id="courses" style="height: 500px; margin-bottom: 0px"></div>
-						</div>
-						<div  class="12u 12u$(small)">
-							<div id="coursetable" class="table-wrapper"></div>
-						</div>
-						<div  class="12u 12u$(small)">
-							<div id="signup">
-								<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfM6yL389yZlCoK4WzQ4Cakz5mFFwG8cffvo-1s4XkdnEGfGg/viewform?embedded=true" width=100% height="600" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
-							</div>
-						</div>
-						
-						<script>
-							// load device list in GeoJSON from a Google spreadsheet
-							var url="https://spreadsheets.google.com/feeds/list/1y9ur6DDQlDNHeQsha714_ZI_5oAiAJ0VRyTQh6wBkdg/od6/public/basic?alt=json"
-							$.getJSON(url, function(data) {
-								var entry = data.feed.entry;
-								courses=getCourseList(entry)
-								
-								displayTable(courses)
-								displayCourses(courses)
-								
-							});
-						</script>
-						
+		<section id="sec-courses" class="wrapper style2 special">
+			<div class="container">
+				<header class="major">
+					<h2>Courses</h2>
+					<p>Explore our range of courses below
+					<br>Courses are either <b><font style="color: green">basic</font></b>, <b><font style="color: blue">intermediate</font></b>, <b><font style="color: orange">advanced</font></b> or <b><font style="color: red">discretionary</font></b>
+					</p>
+				</header>
+				<div class="row">
+					<div  class="12u 12u$(small)">
+						 <a href="#signup" class="button big">Sign Up!</a>
 					</div>
-				</div>
-			</section>
-			
-			
-			<!-- Services -->
-			<section id="sec-services" class="wrapper style1 special">
-				<div class="container">
-					<header class="major">
-						<h2>Services</h2>
-						<p>TechZone Academy offers a wide range of services</p>
-					</header>
-					<div class="row 100%">
-
-						
-						
-						
-							<div class="4u 12u$(medium)">
-								<section class="box">
-									<i class="icon big rounded color1 fa fa-superpowers"></i>
-									<h3>Local Services</h3>
-									<p>Services we provide from and around our centers</p>
-								</section>
-							</div>
-							<div class="4u 12u$(medium)">
-								<section class="box">
-									<i class="icon big rounded color9 fa-desktop"></i>
-									<h3>Custom Software Development</h3>
-									<p>Website Design, Data Visualization, Mapping, Networking, Data Analysis, Web Automation</p>
-								</section>
-							</div>
-							<div class="4u$ 12u$(medium)">
-								<section class="box">
-									<i class="icon big rounded color6 fa-rocket"></i>
-									<h3>Other Services</h3>
-									<p>Consulting, Hosting, Management</p>
-								</section>
-							</div>
-						
-					<!--	
-													<div  class="12u 12u$(small)">
-							<div id="servicepane" style="height: 450px; margin-bottom: 0px"></div>
+					<div  class="12u 12u$(small)">
+						<div id="courses" style="height: 500px; margin-bottom: 0px"></div>
+					</div>
+					<div  class="12u 12u$(small)">
+						<div id="coursetable" class="table-wrapper"></div>
+					</div>
+					<div  class="12u 12u$(small)">
+						<div id="signup">
+							<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfM6yL389yZlCoK4WzQ4Cakz5mFFwG8cffvo-1s4XkdnEGfGg/viewform?embedded=true" width=100% height="600" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
 						</div>
+					</div>
 					
-							<script>
-								var sheetkey="1tz6v3eFreKrc3QCqUCcAlfiMTHskC_jVeTxo4a5cROA"
-								displayServices('https://spreadsheets.google.com/feeds/list/'+sheetkey+'/od6/public/basic?alt=json')
-							</script>-->
-					</div>
+					<script>
+						// load device list in GeoJSON from a Google spreadsheet
+						var url="https://spreadsheets.google.com/feeds/list/1y9ur6DDQlDNHeQsha714_ZI_5oAiAJ0VRyTQh6wBkdg/od6/public/basic?alt=json"
+						$.getJSON(url, function(data) {
+							var entry = data.feed.entry;
+							courses=getCourseList(entry)
+							
+							displayTable(courses)
+							displayCourses(courses)
+							
+						});
+					</script>
+					
 				</div>
-			</section>
+			</div>
+		</section>
+		
+		
+		<!-- Services -->
+		<section id="sec-services" class="wrapper style1 special">
+			<div class="container">
+				<header class="major">
+					<h2>Services</h2>
+					<p>TechZone Academy offers a wide range of services</p>
+				</header>
+				<div class="row 100%">
 
-		<!-- Careers -->
-			<section id="sec-careers" class="wrapper style2 special">
-				<div class="container">
-					<header class="major">
-						<h2>Careers</h2>
-						<p>We are always on the lookout for bright sparks!</p>
-					</header>
-					<section class="profiles">
-						<div id="posrow" class="row uniform">
-							<!--
-							<section class="3u 6u(medium) 12u$(xsmall) profile">
-								<i class="icon rounded 'color' fa 'icon' fa-2x fa-pull-left"></i>
-								<h4> 'designation'</h4>
-								<p>'hirer', 'location'</p>		
-								
+					
+					
+					
+						<div class="4u 12u$(medium)">
+							<section class="box">
+								<i class="icon big rounded color1 fa fa-superpowers"></i>
+								<h3>Local Services</h3>
+								<p>Services we provide from and around our centers</p>
 							</section>
-							-->
-							<script>
-								var sheetkey="1c5YF4LjLXsAlLg9AdtLAPSe1zIAcf9aIRUem1qddXGY"
-								displayPositions('https://spreadsheets.google.com/feeds/list/'+sheetkey+'/od6/public/basic?alt=json')
-							</script>
 						</div>
-					</section>
-					<footer>
-						<p>These are just some of the profiles we train for and hire!</p>
-						<ul class="actions">
-							<li>
-								<a href="#" class="button big">Send us your profile!</a>
-							</li>
-							<li>
-								<a href="#" class="button big">Hire through us!</a>
-							</li>
-						</ul>
-					</footer>
-				</div>
-			</section>
-
-		<!-- About -->
-			<section id="sec-about" class="wrapper style2 special">
-				<div class="container">
-					<header class="major">
-						<h2>About Us</h2>
-						<p>About TechZone Academy</p>
-					</header>
-				</div>
-				<div class="container 100%">
-					<div class="row uniform">
-						
-					
-						<div id="team" class="12u$">
-						<p><h3>Team</h3></p>
-							<section class="profiles">
-							<div id="teamrow" class="row uniform">
-							<!--Template for team member
-								<section class="4u 6u(medium) 12u$(xsmall) profile">
-									<img src="'piclink'" style="height: 92px; width: 92px" alt="" />
-									<h4>'name'</h4>
-									<p>'designation'</p>
-								</section>
-							-->
-							
-							<script>
-								var sheetkey="1i4Q4LxH-Ws3N_QHpKb6qAOM6ySIzJehkxEylRtnePgs"
-								displayTeam('https://spreadsheets.google.com/feeds/list/'+sheetkey+'/od6/public/basic?alt=json')
-							</script>
-							</div>
+						<div class="4u 12u$(medium)">
+							<section class="box">
+								<i class="icon big rounded color9 fa-desktop"></i>
+								<h3>Custom Software Development</h3>
+								<p>Website Design, Data Visualization, Mapping, Networking, Data Analysis, Web Automation</p>
 							</section>
-					
-						</div>
-						<div id="locations" class="12u$">
-							<div class="12u$" ><p><h3>Locations</h3></p></div>
-							<iframe src="locations.html" height=400 width=90%></iframe></div>
-						</div>
-						<div id="story" class="12u$">
-							<p><h3>Story</h3></p>
-							<center><div id="visualization"></div>
-							</center>
-							<script>
-					
-								// load device list in GeoJSON from a Google spreadsheet
-								
-								function getEventList(entry){
-									events=[]
-									i=1
-									$(entry).each(function(){
-										template={}
-										template['content']=this.title.$t
-										template.id=i
-										valuepairs=this.content.$t.split(",")
-										$(valuepairs).each(function(){
-											key=$.trim(this.split(": ")[0]);
-											value=$.trim(this.split(": ")[1]);
-											template[key]=value;
-										});
-										events.push(template)
-										i=i+1;		
-									});
-									return events
-								}
-								
-								
-								var url="https://spreadsheets.google.com/feeds/list/1GOSic4ZJVXgy2gZrSQZ6rrzphv8I70oGwMbKATlfZSs/od6/public/basic?alt=json"
-								$.getJSON(url, function(data) {
-									var entry = data.feed.entry;
-									events=getEventList(entry)
-									//console.log(events)
-									var container = document.getElementById('visualization');
-									var options = {};
-									var timeline = new vis.Timeline(container, events, options);
-
-
-								});
-							</script>	
-							
-						
-						</div>
-						
-					
-					</div>
-				</div>
-			</section>
-
-		<!-- Footer -->
-			<footer id="footer">
-				<div class="container">
-					
-					<!--
-					<section class="links">
-						<div class="row uniform">
-							<section class="12u 12u(medium) 12u$(small)">
-								<h3>Contact Us</h3>
-								
-							
-						</div>
-					</section>
-					-->
-					<div class="row">
-						<div class="8u 12u$(medium)">
-							<ul class="copyright">
-								<li>&copy; TechZone Academy. All rights reserved.</li>
-								<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
-								<li>Images: <a href="http://unsplash.com">Unsplash</a></li>
-								<li>Email: info@techzoneacademy.com</li>
-								<li>Mob: +91 9012022211</li>
-							</ul>
 						</div>
 						<div class="4u$ 12u$(medium)">
-							<ul class="icons">
-								<li>
-									<a class="icon rounded fa-facebook" href=""><span class="label">Facebook</span></a>
-								</li>
-								<li>
-									<a class="icon rounded fa-twitter"><span class="label">Twitter</span></a>
-								</li>
-								<li>
-									<a class="icon rounded fa-google-plus"><span class="label">Google+</span></a>
-								</li>
-								<li>
-									<a class="icon rounded fa-linkedin"><span class="label">LinkedIn</span></a>
-								</li>
-							</ul>
+							<section class="box">
+								<i class="icon big rounded color6 fa-rocket"></i>
+								<h3>Other Services</h3>
+								<p>Consulting, Hosting, Management</p>
+							</section>
 						</div>
+					
+				<!--	
+												<div  class="12u 12u$(small)">
+						<div id="servicepane" style="height: 450px; margin-bottom: 0px"></div>
+					</div>
+				
+						<script>
+							var sheetkey="1tz6v3eFreKrc3QCqUCcAlfiMTHskC_jVeTxo4a5cROA"
+							displayServices('https://spreadsheets.google.com/feeds/list/'+sheetkey+'/od6/public/basic?alt=json')
+						</script>-->
+				</div>
+			</div>
+		</section>
+
+		<!-- Careers -->
+		<section id="sec-careers" class="wrapper style2 special">
+			<div class="container">
+				<header class="major">
+					<h2>Careers</h2>
+					<p>We are always on the lookout for bright sparks!</p>
+				</header>
+				<section class="profiles">
+					<div id="posrow" class="row uniform">
+						<!--
+						<section class="3u 6u(medium) 12u$(xsmall) profile">
+							<i class="icon rounded 'color' fa 'icon' fa-2x fa-pull-left"></i>
+							<h4> 'designation'</h4>
+							<p>'hirer', 'location'</p>		
+							
+						</section>
+						-->
+						<script>
+							var sheetkey="1c5YF4LjLXsAlLg9AdtLAPSe1zIAcf9aIRUem1qddXGY"
+							displayPositions('https://spreadsheets.google.com/feeds/list/'+sheetkey+'/od6/public/basic?alt=json')
+						</script>
+					</div>
+				</section>
+				<footer>
+					<p>These are just some of the profiles we train for and hire!</p>
+					<ul class="actions">
+						<li>
+							<a href="#" class="button big">Send us your profile!</a>
+						</li>
+						<li>
+							<a href="#" class="button big">Hire through us!</a>
+						</li>
+					</ul>
+				</footer>
+			</div>
+		</section>
+
+		<!-- About -->
+		<section id="sec-about" class="wrapper style2 special">
+			<div class="container">
+				<header class="major">
+					<h2>About Us</h2>
+					<p>About TechZone Academy</p>
+				</header>
+			</div>
+			<div class="container 100%">
+				<div class="row uniform">
+					
+				
+					<div id="team" class="12u$">
+					<p><h3>Team</h3></p>
+						<section class="profiles">
+						<div id="teamrow" class="row uniform">
+						<!--Template for team member
+							<section class="4u 6u(medium) 12u$(xsmall) profile">
+								<img src="'piclink'" style="height: 92px; width: 92px" alt="" />
+								<h4>'name'</h4>
+								<p>'designation'</p>
+							</section>
+						-->
+						
+						<script>
+							var sheetkey="1i4Q4LxH-Ws3N_QHpKb6qAOM6ySIzJehkxEylRtnePgs"
+							displayTeam('https://spreadsheets.google.com/feeds/list/'+sheetkey+'/od6/public/basic?alt=json')
+						</script>
+						</div>
+						</section>
+				
+					</div>
+					<div id="locations" class="12u$">
+						<div class="12u$" ><p><h3>Locations</h3></p></div>
+						<iframe src="locations.html" height=400 width=90%></iframe></div>
+					</div>
+					<div id="story" class="12u$">
+						<p><h3>Story</h3></p>
+						<center><div id="visualization"></div>
+						</center>
+						<script>
+				
+							// load device list in GeoJSON from a Google spreadsheet
+							
+							function getEventList(entry){
+								events=[]
+								i=1
+								$(entry).each(function(){
+									template={}
+									template['content']=this.title.$t
+									template.id=i
+									valuepairs=this.content.$t.split(",")
+									$(valuepairs).each(function(){
+										key=$.trim(this.split(": ")[0]);
+										value=$.trim(this.split(": ")[1]);
+										template[key]=value;
+									});
+									events.push(template)
+									i=i+1;		
+								});
+								return events
+							}
+							
+							
+							var url="https://spreadsheets.google.com/feeds/list/1GOSic4ZJVXgy2gZrSQZ6rrzphv8I70oGwMbKATlfZSs/od6/public/basic?alt=json"
+							$.getJSON(url, function(data) {
+								var entry = data.feed.entry;
+								events=getEventList(entry)
+								//console.log(events)
+								var container = document.getElementById('visualization');
+								var options = {};
+								var timeline = new vis.Timeline(container, events, options);
+
+
+							});
+						</script>	
+						
+					
+					</div>
+					
+				
+				</div>
+			</div>
+	
+		</section>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="container">
+				
+				<!--
+				<section class="links">
+					<div class="row uniform">
+						<section class="12u 12u(medium) 12u$(small)">
+							<h3>Contact Us</h3>
+							
+						
+					</div>
+				</section>
+				-->
+				<div class="row">
+					<div class="8u 12u$(medium)">
+						<ul class="copyright">
+							<li>&copy; TechZone Academy. All rights reserved.</li>
+							<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
+							<li>Images: <a href="http://unsplash.com">Unsplash</a></li>
+							<li>Email: info@techzoneacademy.com</li>
+							<li>Mob: +91 9012022211</li>
+						</ul>
+					</div>
+					<div class="4u$ 12u$(medium)">
+						<ul class="icons">
+							<li>
+								<a class="icon rounded fa-facebook" href=""><span class="label">Facebook</span></a>
+							</li>
+							<li>
+								<a class="icon rounded fa-twitter"><span class="label">Twitter</span></a>
+							</li>
+							<li>
+								<a class="icon rounded fa-google-plus"><span class="label">Google+</span></a>
+							</li>
+							<li>
+								<a class="icon rounded fa-linkedin"><span class="label">LinkedIn</span></a>
+							</li>
+						</ul>
 					</div>
 				</div>
-			</footer>
+			</div>
+		</footer>
 
 	</body>
 </html>
