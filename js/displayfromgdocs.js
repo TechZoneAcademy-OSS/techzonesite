@@ -42,7 +42,7 @@ function addWebsiteRows(websites,rowmax=3){
 	websites.forEach(function(d){
 		rowmax=Math.min(rowmax,websites.length)
 		d3.select("#websiterow").append("section").attr("class", 12/rowmax+'u 6u(medium) 12u$(xsmall) profile')
-			.html('<h1>'+d.clientname+'</h1>\
+			.html('<a href='+d.url+'><h1>'+d.clientname+'</h1></a>\
 					<p>'+d.description+'<p>\
 					<div class="wrap"><iframe src="'+d.url+'" class="frame"/></div>');
 	})
